@@ -3,14 +3,14 @@
 # The orchestrator reads and updates it every session.
 
 project:
-  name: ""          # Project name (e.g., "Getting Started with OpenShift")
-  id: ""            # Short identifier (e.g., "ocp-getting-started")
-  created: ""       # ISO 8601 date (YYYY-MM-DD)
-  owner_github: ""  # GitHub username (e.g., "jsmith")
-  owner_email: ""   # Red Hat SSO email (e.g., "jsmith@redhat.com")
+  name: "Leapp-O-Matic: The One-Click Path to RHEL 10"
+  id: "leapp-o-matic-rhel10"
+  created: "2026-07-08"
+  owner_github: "mitsharm"
+  owner_email: "mitsharm@redhat.com"
   type: ""          # workshop | demo
   showroom_type: ""  # classic | zero_touch
-  deployment_mode: ""  # rhdp_published | self_published
+  deployment_mode: "rhdp_published"
   autonomy: guided  # guided | assisted | autonomous
 
 lifecycle:
