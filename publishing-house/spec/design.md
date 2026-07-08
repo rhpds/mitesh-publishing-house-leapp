@@ -1,70 +1,61 @@
-# [Project Title]
-
-<!-- This file is populated by the intake agent during the intake phase. -->
-<!-- Run /rhdp-publishing-house to get started, or fill in the sections below manually. -->
+# Leapp-O-Matic: The One-Click Path to RHEL 10
 
 ## Problem Statement
 
-[What gap does this fill? Who has this problem and why can't they solve it today? 2-3 sentences, specific — reference a real persona with a real need.]
+Infrastructure teams managing mixed RHEL fleets face a costly and disruptive upgrade cycle when new major versions ship. Manual in-place upgrades using Leapp are error-prone, time-consuming, and difficult to standardize across RHEL 8 and RHEL 9 systems at scale. This demo shows how Ansible Automation Platform 2.6 turns that complexity into a repeatable, auditable single-click operation — enabling infrastructure engineers to upgrade entire fleets to RHEL 10 with confidence.
 
 ## Target Audience
 
-- **Role:** [Data scientists, platform engineers, developers, etc.]
-- **Experience level:** [Beginner, intermediate, or advanced]
-- **What they already know:** [Existing skills and knowledge]
-- **What they don't know:** [Skills this workshop teaches]
-- **Prerequisites:** [What they need before starting]
+- **Role:** Infrastructure engineers, system administrators
+- **Experience level:** Intermediate to Advanced
+- **What they already know:** RHEL administration basics, familiarity with Ansible concepts, understanding of OS upgrade challenges
+- **What they don't know:** How to use Leapp for in-place upgrades, how to automate multi-version fleet upgrades with AAP, how to assess and remediate upgrade inhibitors at scale
+- **Prerequisites:** Basic RHEL system administration experience, familiarity with Ansible Automation Platform concepts
 
 ## Learning Objectives
 
-1. [Action verb] [specific, measurable outcome]
-2. [Action verb] [specific, measurable outcome]
-3. [Action verb] [specific, measurable outcome]
-
-<!-- 3-7 objectives. Start with action verbs: Configure, Deploy, Create, Implement, Troubleshoot, Monitor, Scale. Each should be testable. NOT: Understand, Learn, Know. -->
+1. Explain the Leapp in-place upgrade path from RHEL 8.x and RHEL 9.x to RHEL 10 and when to use it
+2. Demonstrate pre-upgrade inhibitor analysis across a mixed-version RHEL fleet using Leapp assessment jobs in AAP
+3. Execute an automated in-place upgrade from RHEL 8.10, RHEL 9.5, and RHEL 9.7 to RHEL 10 using a single AAP job template
+4. Validate post-upgrade system state and confirm successful RHEL 10 landing across all target systems
 
 ## Content Type
 
-[Workshop (hands-on) or Demo (presenter-led)]
+Demo (presenter-led)
 
 ## Products & Technologies
 
-- [Official Red Hat product name with version if relevant]
-- [Additional products/technologies]
-
-<!-- Use official names: "Red Hat OpenShift", not "OpenShift". List upstream projects separately. -->
+- Red Hat Enterprise Linux 10
+- Red Hat Enterprise Linux 9.7, 9.5
+- Red Hat Enterprise Linux 8.10
+- Red Hat Ansible Automation Platform 2.6
+- Leapp (in-place upgrade framework)
 
 ## Module Map
 
 | Module | Title | Duration |
 |--------|-------|----------|
-| 1 | [Module title] | [XX min] |
-| 2 | [Module title] | [XX min] |
-| — | **Total hands-on** | **[X hours]** |
-| — | Intro / presentation | [~XX min] |
-| — | **Total workshop** | **[~X hours]** |
-
-<!-- Each module 10-30 min. Total: workshop 1-4 hours, demo 15-45 min. Modules should build on each other. -->
+| 1 | The Upgrade Challenge: RHEL Lifecycle and Leapp | ~10 min |
+| 2 | Pre-Upgrade Analysis — Running Inhibitor Checks Across the Fleet | ~10 min |
+| 3 | One-Click Execution — AAP Job Template Kicks Off the Upgrade | ~20 min |
+| 4 | Post-Upgrade Validation — Verifying a Clean RHEL 10 Landing | ~10 min |
+| — | **Total demo** | **~50 min** |
 
 ## Difficulty Level
 
-[Beginner, Intermediate, or Advanced]
+Intermediate to Advanced
 
 ## Environment
 
-**Learner view:** [What exists when the lab starts — pre-deployed resources, what participants see and interact with. Be specific about cluster details.]
+**Presenter view:** Pre-deployed environment on CNV with AAP 2.6 controller, a job template for Leapp upgrades, and four managed RHEL instances (2x RHEL 9.7, 1x RHEL 9.5, 1x RHEL 8.10). The presenter demonstrates the full upgrade workflow from the AAP web console — no CLI installs required during the demo.
 
-**Automation needed:** [Yes/No]
-
-[If yes, list what automation must provision — operators, per-user resources, sample apps, data sets.]
+**Automation needed:** Yes — AAP 2.6 controller fully configured with inventory, credentials, and the Leapp upgrade job template pre-loaded. All RHEL instances pre-provisioned and registered as managed nodes.
 
 ## Infrastructure Requirements
 
-- **Base infrastructure:** [Base CI type: ocp4-cluster, ocp-workloads, cloud-vms-base, or existing CI name]
-- **Sizing:** [Node types and counts with resources — e.g., "3 masters (4 CPU, 16GB RAM), 6 workers (8 CPU, 32GB RAM, 100GB disk)"]
-- **Cloud provider:** [CNV (default), AWS, GCP, Azure]
-- **Automation approach:** [Ansible, GitOps (Helm + ArgoCD), or combo]
-- **Existing workloads to reuse:** [AgnosticD workloads, GitOps repos, Ansible collections — or "None"]
-- **New workloads needed:** [What needs to be developed — or "None"]
-
-<!-- Not all fields must be known at intake. "TBD, estimating ~X" is fine. Spec refinement fills gaps. -->
+- **Base infrastructure:** cloud-vms-base (AgnosticD v2)
+- **Sizing:** TBD — estimating 1 AAP controller node (8 CPU, 16GB RAM), 4 RHEL managed nodes (2 CPU, 4GB RAM each, 40GB disk)
+- **Cloud provider:** CNV
+- **Automation approach:** Ansible (AAP 2.6 job templates via playbook-rhel10-upgrader)
+- **Existing workloads to reuse:** Custom workloads from https://gitlab.com/ansible-ssa/playbook-rhel10-upgrader
+- **New workloads needed:** AgnosticD v2 cloud-vms-base configuration wrapping the upgrader playbooks; AgnosticV catalog item for CNV
